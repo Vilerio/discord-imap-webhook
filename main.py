@@ -9,7 +9,7 @@ serveur_imap = 'imap.mail.com'
 port_imap = 993
 nom_utilisateur = 'email'
 mot_de_passe = 'mot de passe'
-webhook_url = 'url du webhook'
+url_webhook = 'URL du webhook'
 
 
 def envoyer_message_discord(contenu):
@@ -24,7 +24,7 @@ def envoyer_message_discord(contenu):
     headers = {
         'Content-Type': 'application/json'
     }
-    response = requests.post(webhook_url, data=json.dumps(data), headers=headers)
+    response = requests.post(url_webhook, data=json.dumps(data), headers=headers)
     
 
 def verifier_nouveau_mail():
@@ -35,8 +35,8 @@ def verifier_nouveau_mail():
     ids = data[0].split()
 
     if ids:
-        latest_email_id = ids[-1]
-        result, data = mail.fetch(latest_email_id, '(RFC822)')
+        dernier_id_email = ids[-1]
+        result, data = mail.fetch(dernier_id_email, '(RFC822)')
         raw_email = data[0][1]
         msg = email.message_from_bytes(raw_email)
         sujet = msg['Subject']
@@ -58,5 +58,4 @@ def verifier_nouveau_mail():
 
 while True:
     verifier_nouveau_mail()
-    time.sleep(60) 
-
+    time.sleep(60)
