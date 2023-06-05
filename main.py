@@ -58,5 +58,5 @@ def verifier_nouveau_mail():
 
 while True:
     verifier_nouveau_mail()
-    time.sleep(1) 
+    time.sleep(60) 
 
